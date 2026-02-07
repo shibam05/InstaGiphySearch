@@ -83,6 +83,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
                 gifs.push(doc.data() as AddedGif);
             });
             setState(prev => ({ ...prev, addedGifs: gifs }));
+        }, (error) => {
+            console.error("Firestore connection failed. If you have an Ad Blocker, please disable it for this site.", error);
+            alert("Unable to connect to Community Picks. Please disable your Ad Blocker or Privacy Shield.");
         });
 
         return () => unsubscribe();
