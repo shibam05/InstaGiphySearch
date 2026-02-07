@@ -17,6 +17,7 @@ export type GifData = {
         is_verified?: boolean;
     };
     username?: string;
+    communityLikes?: number;
 };
 
 export const GiphyService = {
