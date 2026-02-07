@@ -71,6 +71,9 @@ export function GifCard({ gif, className }: GifCardProps) {
                         >
                             <Heart size={18} fill={liked ? "currentColor" : "none"} />
                         </button>
+                        {gif.communityLikes !== undefined && gif.communityLikes > 0 && (
+                            <span className="text-xs font-medium text-white/90">{gif.communityLikes}</span>
+                        )}
                         <button
                             onClick={handleReport}
                             className="p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white/20 text-white"

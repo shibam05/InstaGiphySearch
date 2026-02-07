@@ -19,7 +19,7 @@ export default async function Home() {
                     <span>The Vibe Check for GIFs</span>
                 </div>
 
-                <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white via-white/90 to-white/50">
+                <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-linear-to-br from-white via-white/90 to-white/50">
                     Find Your <br /> <span className="italic font-serif font-normal text-white">Vibe.</span>
                 </h1>
 
