@@ -14,4 +14,8 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
+if (!firebaseConfig.apiKey) {
+    console.error("FIREBASE CONFIG MISSING: apiKey is not defined. Please check your .env.local file and restart the server.");
+}
+
 export { db };
