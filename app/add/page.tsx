@@ -88,19 +88,26 @@ export default function AddGifPage() {
                                 <GifCard gif={previewGif} />
                             </div>
 
-                            <div className="space-y-2">
+                            <div className="space-y-3">
                                 <label className="text-sm font-medium leading-none">
                                     Add Tags (Optional)
                                 </label>
+                                <div className="flex flex-wrap gap-2 mb-2">
+                                    {tags.split(',').map(t => t.trim()).filter(Boolean).map((tag, i) => (
+                                        <span key={i} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                                 <input
                                     type="text"
                                     value={tags}
                                     onChange={e => setTags(e.target.value)}
-                                    placeholder="funny, vibe, cool"
+                                    placeholder="Type tags separated by commas... (e.g. funny, reaction, cat)"
                                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                 />
                                 <p className="text-[0.8rem] text-muted-foreground">
-                                    Comma separated. These help others find it.
+                                    Separate tags with commas.
                                 </p>
                             </div>
 
