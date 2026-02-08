@@ -3,6 +3,7 @@
 import { GifData } from "@/lib/giphy";
 import { Heart, Flag, Share2, CornerUpRight } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/lib/store";
@@ -41,6 +42,8 @@ export function GifCard({ gif, className }: GifCardProps) {
             animate={{ opacity: 1, scale: 1 }}
             className={cn("group relative rounded-xl overflow-hidden cursor-pointer bg-muted/20", className)}
         >
+            <Link href={`/gif/${gif.id}`} className="absolute inset-0 z-10" aria-label={`View ${gif.title}`} />
+
             <div className="aspect-[4/3] w-full relative">
                 {/* Use standard img for simplicity and avoiding Next.js config complexity with external domains for now */}
                 <img
@@ -52,7 +55,7 @@ export function GifCard({ gif, className }: GifCardProps) {
             </div>
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+            <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                 <div className="flex items-center justify-between text-white">
                     <div className="flex flex-col">
                         <span className="font-semibold text-sm truncate max-w-[150px]">{gif.title || "Untitled GIF"}</span>
@@ -67,7 +70,7 @@ export function GifCard({ gif, className }: GifCardProps) {
                     <div className="flex items-center gap-2">
                         <button
                             onClick={handleLike}
-                            className={cn("p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white/20", liked ? "text-red-500 fill-current" : "text-white")}
+                            className={cn("p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white/20 pointer-events-auto", liked ? "text-red-500 fill-current" : "text-white")}
                         >
                             <Heart size={18} fill={liked ? "currentColor" : "none"} />
                         </button>
@@ -76,7 +79,7 @@ export function GifCard({ gif, className }: GifCardProps) {
                         )}
                         <button
                             onClick={handleReport}
-                            className="p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white/20 text-white"
+                            className="p-2 rounded-full backdrop-blur-sm transition-colors hover:bg-white/20 text-white pointer-events-auto"
                         >
                             <Flag size={18} />
                         </button>
