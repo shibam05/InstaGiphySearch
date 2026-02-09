@@ -1,46 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useUserStore } from "@/lib/store";
 import { GiphyService, GifData } from "@/lib/giphy";
 import { GifCard } from "@/components/shared/GifCard";
 import { Search, Plus, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AddGifPage() {
+import { Suspense } from "react";
+
+function AddGifContent() {
     const [query, setQuery] = useState("");
     const [loading, setLoading] = useState(false);
     const [previewGif, setPreviewGif] = useState<GifData | null>(null);
     const [tags, setTags] = useState("");
     const { addGif } = useUserStore();
     const router = useRouter();
+    const searchParams = useSearchParams();
 
-    const handlePreview = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!query) return;
-
+    const fetchGif = useCallback(async (searchTerm: string) => {
+        if (!searchTerm) return;
         setLoading(true);
         setPreviewGif(null);
 
-        // Try to see if it's an ID or a search
-        // Simple logic: if click "Find", we search for ID first
-        // If not found, we search regular query. 
-        // BUT user requirement says "gif names/giphy username". 
-        // Giphy ID is precise. Username is vague. 
-        // Let's assume user pastes ID or searches.
-
         // 1. Try get by ID
-        const byId = await GiphyService.getById(query);
+        const byId = await GiphyService.getById(searchTerm);
         if (byId) {
             setPreviewGif(byId);
         } else {
             // 2. Fallback search
-            const search = await GiphyService.search(query, 1);
+            const search = await GiphyService.search(searchTerm, 1);
             if (search.data && search.data.length > 0) {
                 setPreviewGif(search.data[0]);
             }
         }
         setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        const idParam = searchParams.get("id");
+        if (idParam) {
+            setQuery(idParam);
+            fetchGif(idParam);
+        }
+    }, [searchParams, fetchGif]);
+
+    const handlePreview = async (e: React.FormEvent) => {
+        e.preventDefault();
+        fetchGif(query);
     };
 
     const handleAdd = () => {
@@ -123,5 +130,13 @@ export default function AddGifPage() {
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function AddGifPage() {
+    return (
+        <Suspense fallback={<div className="container mx-auto px-4 py-20 text-center"><Loader2 className="animate-spin mx-auto" /></div>}>
+            <AddGifContent />
+        </Suspense>
     );
 }
