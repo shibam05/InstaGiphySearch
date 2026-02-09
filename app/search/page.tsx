@@ -5,6 +5,7 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 
 import { SearchInput } from "@/components/shared/SearchInput";
+import { LocalSearchResults } from "@/components/shared/LocalSearchResults";
 
 export const metadata: Metadata = {
     title: "Search - InstaGif",
@@ -33,6 +34,7 @@ export default async function SearchPage({
                     <SearchInput initialQuery={q} />
                 </div>
 
+                {q && <LocalSearchResults query={q} />}
 
                 {q && initialResults.data.length === 0 && (
                     <div className="text-center py-20 text-muted-foreground">
