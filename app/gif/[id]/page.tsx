@@ -2,6 +2,7 @@
 import { GiphyService } from "@/lib/giphy";
 import { ArrowLeft, User, Calendar, Star, Share2, ExternalLink } from "lucide-react";
 import { GifTags } from "@/components/shared/GifTags";
+import { AddToShowcaseButton } from "@/components/shared/AddToShowcaseButton";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -106,6 +107,8 @@ export default async function GifDetailsPage({
                     </div>
 
                     <div className="space-y-4">
+                        <AddToShowcaseButton id={gif.id} />
+
                         {/* We could add generic share functionality here */}
                         <button className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
                             <Share2 size={18} />
