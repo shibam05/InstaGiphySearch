@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export function ShowcaseFeed({ initialTrending }: { initialTrending: GifData[] }) {
     const { userGifsDetails } = useUserStore();
-    const [activeTab, setActiveTab] = useState<'trending' | 'community'>('trending');
+    const [activeTab, setActiveTab] = useState<'trending' | 'community'>('community');
 
     // We can switch between views or merge them. 
     // For 'trending', we show the API results.
@@ -19,22 +19,22 @@ export function ShowcaseFeed({ initialTrending }: { initialTrending: GifData[] }
             {/* Tabs */}
             <div className="flex items-center justify-center gap-4">
                 <button
-                    onClick={() => setActiveTab('trending')}
-                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'trending'
-                        ? 'bg-primary text-primary-foreground shadow-lg scale-105'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                        }`}
-                >
-                    Trending
-                </button>
-                <button
                     onClick={() => setActiveTab('community')}
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'community'
-                        ? 'bg-primary text-primary-foreground shadow-lg scale-105'
+                        ? 'bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'
                         }`}
                 >
                     Community Picks ({userGifsDetails.length})
+                </button>
+                <button
+                    onClick={() => setActiveTab('trending')}
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'trending'
+                        ? 'bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
+                        : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                        }`}
+                >
+                    Trending
                 </button>
             </div>
 
