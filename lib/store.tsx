@@ -34,6 +34,7 @@ type UserContextType = {
     addGif: (giphyId: string, tags: string[]) => Promise<void>;
     toggleLike: (giphyId: string) => Promise<void>;
     reportGif: (giphyId: string) => Promise<void>;
+    updateTags: (giphyId: string, newTags: string[]) => Promise<void>;
     isLiked: (giphyId: string) => boolean;
     userGifsDetails: GifData[];
 };
@@ -187,10 +188,29 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         }
     };
 
+    const updateTags = async (giphyId: string, newTags: string[]) => {
+        const docRef = doc(db, "community_gifs", giphyId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            await updateDoc(docRef, {
+                customTags: newTags
+            });
+        } else {
+            // If it doesn't exist (e.g. from trending), create it so we can attach tags
+            await setDoc(docRef, {
+                id: giphyId,
+                addedAt: Date.now(),
+                customTags: newTags,
+                likes: 0
+            });
+        }
+    };
+
     const isLiked = (giphyId: string) => state.likedGifIds.includes(giphyId);
 
     return (
-        <UserContext.Provider value={{ state, addGif, toggleLike, reportGif, isLiked, userGifsDetails }}>
+        <UserContext.Provider value={{ state, addGif, toggleLike, reportGif, updateTags, isLiked, userGifsDetails }}>
             {children}
         </UserContext.Provider>
     );
