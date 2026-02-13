@@ -26,18 +26,18 @@ export function Header() {
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="bg-primary text-primary-foreground p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
+                    <div className="bg-gradient-to-br from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform shadow-lg">
                         <Sparkles size={20} />
                     </div>
-                    <span className="font-bold text-xl tracking-tight">InstaGif</span>
+                    <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#ff0069] to-[#7638fa]">InstaGif</span>
                 </Link>
 
                 <div className="flex items-center gap-6">
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-                        <Link href="/" className="hover:text-primary transition-colors">
+                        <Link href="/" className="hover:text-[#ff0069] transition-colors">
                             Home
                         </Link>
-                        <Link href="/showcase" className="hover:text-primary transition-colors">
+                        <Link href="/showcase" className="hover:text-[#ff0069] transition-colors">
                             Showcase
                         </Link>
                     </nav>
@@ -52,7 +52,7 @@ export function Header() {
                         </Link>
                         <Link
                             href="/add"
-                            className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+                            className="flex items-center gap-2 bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity shadow-md"
                         >
                             <PlusCircle size={16} />
                             <span className="hidden sm:inline">Add GIF</span>
