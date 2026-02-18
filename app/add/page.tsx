@@ -121,7 +121,7 @@ function AddGifContent() {
                             <button
                                 type="button"
                                 onClick={handleAdd}
-                                className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
+                                className="w-full inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-[#ff0069] to-[#7638fa] text-white hover:opacity-90 h-11 px-8 shadow-md"
                             >
                                 <Plus size={18} className="mr-2" /> Add to Showcase
                             </button>
