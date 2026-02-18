@@ -1,11 +1,9 @@
-import { GiphyService } from "@/lib/giphy";
-import { GifCard } from "@/components/shared/GifCard";
+import { CommunityTeaser } from "@/components/shared/CommunityTeaser";
 import { ParticlesBackground } from "@/components/shared/ParticlesBackground";
 import Link from "next/link";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 
-export default async function Home() {
-    const trending = await GiphyService.getTrending(8);
+export default function Home() {
 
     return (
         <div className="flex flex-col min-h-[calc(100vh-6rem)]">
@@ -41,21 +39,8 @@ export default async function Home() {
                 </form>
             </section>
 
-            {/* Trending Teaser */}
-            <section className="px-4 pb-20 container mx-auto">
-                <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-2xl font-bold tracking-tight">Trending Now</h2>
-                    <Link href="/showcase" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
-                        View all <ArrowRight size={16} />
-                    </Link>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {trending.data.map((gif: any) => (
-                        <GifCard key={gif.id} gif={gif} />
-                    ))}
-                </div>
-            </section>
+            {/* Community Teaser */}
+            <CommunityTeaser />
         </div>
     );
 }
