@@ -26,7 +26,7 @@ export function Header() {
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="bg-gradient-to-br from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform shadow-lg">
+                    <div className="bg-gradient-to-br from-[#ff0069] to-[#7638fa] text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform shadow-lg">
                         <Sparkles size={20} />
                     </div>
                     <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#ff0069] to-[#7638fa]">InstaGif</span>
@@ -52,7 +52,7 @@ export function Header() {
                         </Link>
                         <Link
                             href="/add"
-                            className="flex items-center gap-2 bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity shadow-md"
+                            className="flex items-center gap-2 bg-gradient-to-r from-[#ff0069] to-[#7638fa] text-white px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity shadow-md"
                         >
                             <PlusCircle size={16} />
                             <span className="hidden sm:inline">Add GIF</span>
