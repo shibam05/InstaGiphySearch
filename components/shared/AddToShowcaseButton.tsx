@@ -30,7 +30,7 @@ export function AddToShowcaseButton({ id }: AddToShowcaseButtonProps) {
     return (
         <button
             onClick={() => router.push(`/add?id=${id}`)}
-            className="w-full flex items-center justify-center gap-2 bg-secondary text-secondary-foreground py-3 rounded-xl font-medium hover:bg-secondary/80 transition-colors border border-border"
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#ff0069] to-[#7638fa] text-white py-3 rounded-xl font-medium hover:opacity-90 transition-opacity shadow-md border-0"
         >
             <PlusCircle size={18} />
             Add to Showcase
