@@ -21,7 +21,7 @@ export function ShowcaseFeed({ initialTrending }: { initialTrending: GifData[] }
                 <button
                     onClick={() => setActiveTab('community')}
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'community'
-                        ? 'bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
+                        ? 'bg-gradient-to-r from-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'
                         }`}
                 >
@@ -30,7 +30,7 @@ export function ShowcaseFeed({ initialTrending }: { initialTrending: GifData[] }
                 <button
                     onClick={() => setActiveTab('trending')}
                     className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'trending'
-                        ? 'bg-gradient-to-r from-[#ffd600] via-[#ff7a00] via-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
+                        ? 'bg-gradient-to-r from-[#ff0069] to-[#7638fa] text-white shadow-lg scale-105'
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'
                         }`}
                 >
