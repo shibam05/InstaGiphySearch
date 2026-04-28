@@ -40,7 +40,7 @@ export function GifCard({ gif, className }: GifCardProps) {
             layout
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className={cn("group relative rounded-xl overflow-hidden cursor-pointer bg-muted/20", className)}
+            className={cn("group relative rounded-xl overflow-hidden cursor-pointer bg-muted/20 border border-white/10", className)}
         >
             <Link href={`/gif/${gif.id}`} className="absolute inset-0 z-10" aria-label={`View ${gif.title}`} />
 
