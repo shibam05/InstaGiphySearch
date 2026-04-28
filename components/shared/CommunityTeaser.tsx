@@ -11,6 +11,35 @@ export function CommunityTeaser() {
     // Show up to 8 items
     const displayGifs = userGifsDetails.slice(0, 8);
 
+    if (state.connectionError) {
+        return (
+            <section className="px-4 pb-20 container mx-auto">
+                <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-2xl font-bold tracking-tight">Community Picks</h2>
+                </div>
+                <div className="text-center py-12 border border-dashed border-red-500/30 rounded-xl bg-red-500/5">
+                    <p className="text-red-400 font-medium mb-2">Unable to connect to Community Picks.</p>
+                    <p className="text-muted-foreground text-sm">Please disable your Ad Blocker or Privacy Shield to view community content.</p>
+                </div>
+            </section>
+        );
+    }
+
+    if (state.isLoading) {
+        return (
+            <section className="px-4 pb-20 container mx-auto">
+                <div className="flex items-center justify-between mb-8">
+                    <div className="h-8 w-48 bg-muted animate-pulse rounded-md"></div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[...Array(4)].map((_, i) => (
+                        <div key={i} className="aspect-[4/3] bg-muted animate-pulse rounded-xl"></div>
+                    ))}
+                </div>
+            </section>
+        );
+    }
+
     if (userGifsDetails.length === 0) {
         return (
             <section className="px-4 pb-20 container mx-auto">

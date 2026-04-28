@@ -27,6 +27,8 @@ type UserState = {
     addedGifs: AddedGif[];
     likedGifIds: string[]; // Local user's liked GIFs (kept in localStorage)
     reportedGifIds: string[]; // Local user's reported GIFs (kept in localStorage)
+    connectionError: boolean;
+    isLoading: boolean;
 };
 
 type UserContextType = {
@@ -48,6 +50,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         addedGifs: [],
         likedGifIds: [],
         reportedGifIds: [],
+        connectionError: false,
+        isLoading: true,
     });
     const [userGifsDetails, setUserGifsDetails] = useState<GifData[]>([]);
 
@@ -79,13 +83,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const q = query(collection(db, "community_gifs"), orderBy("addedAt", "desc"));
         const unsubscribe = onSnapshot(q, (snapshot) => {
+            console.log(`Firestore snapshot received: ${snapshot.size} documents`);
             const gifs: AddedGif[] = [];
             snapshot.forEach((doc) => {
                 gifs.push(doc.data() as AddedGif);
             });
-            setState(prev => ({ ...prev, addedGifs: gifs }));
+            setState(prev => ({ ...prev, addedGifs: gifs, connectionError: false, isLoading: false }));
         }, (error) => {
             console.error("Firestore connection failed. If you have an Ad Blocker, please disable it for this site.", error);
+            setState(prev => ({ ...prev, connectionError: true, isLoading: false }));
         });
 
         return () => unsubscribe();
@@ -107,6 +113,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             if (uniqueIds.length === 0) return;
 
             const res = await GiphyService.getByIds(uniqueIds);
+            console.log(`Fetched details for ${uniqueIds.length} GIFs from Giphy. Status: ${res ? 'Success' : 'Failed'}`);
+
             if (res && res.data) {
                 // Merge Firestore data (likes) with Giphy data
                 const details = res.data.map((gif: any) => {

@@ -10,9 +10,16 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// Enable long-polling to bypass ad-blockers that might block WebSockets
+import { initializeFirestore } from "firebase/firestore";
+
 // Initialize Firebase (singleton pattern)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-const db = getFirestore(app);
+
+// Use initializeFirestore with settings instead of getFirestore
+const db = initializeFirestore(app, {
+    experimentalForceLongPolling: true,
+});
 
 if (!firebaseConfig.apiKey) {
     console.error("FIREBASE CONFIG MISSING: apiKey is not defined. Please check your .env.local file and restart the server.");

@@ -9,6 +9,14 @@ export function LocalSearchResults({ query }: { query: string }) {
 
     if (!query) return null;
 
+    if (state.connectionError) {
+        return (
+            <div className="mb-12 p-6 border border-dashed border-red-500/30 rounded-xl bg-red-500/5">
+                <p className="text-red-400 font-medium text-sm">Community results unavailable due to connection block (Ad Blocker/Shield).</p>
+            </div>
+        );
+    }
+
     const lowerQuery = query.toLowerCase();
 
     // Filter added GIFs where title or tags match the query

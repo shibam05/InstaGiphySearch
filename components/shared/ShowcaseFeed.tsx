@@ -46,7 +46,18 @@ export function ShowcaseFeed({ initialTrending }: { initialTrending: GifData[] }
                         ))}
                     </div>
                 ) : (
-                    userGifsDetails.length > 0 ? (
+                    state.connectionError ? (
+                        <div className="text-center py-20 border border-dashed border-red-500/30 rounded-xl bg-red-500/5">
+                            <p className="text-red-400 font-medium mb-2">Unable to connect to Community Picks.</p>
+                            <p className="text-muted-foreground text-sm">Please disable your Ad Blocker or Privacy Shield to see these vibes.</p>
+                        </div>
+                    ) : state.isLoading ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            {[...Array(8)].map((_, i) => (
+                                <div key={i} className="aspect-[4/3] bg-muted animate-pulse rounded-xl"></div>
+                            ))}
+                        </div>
+                    ) : userGifsDetails.length > 0 ? (
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                             {userGifsDetails.map(gif => (
                                 <GifCard key={gif.id} gif={gif} />
